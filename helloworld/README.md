@@ -116,3 +116,17 @@ while true; do curl -s -o /dev/null "http://10.43.195.89/hello"; done
 [open a second terminal]
 while true; do curl -s -o /dev/null "http://10.43.195.89/hello"; done
 ```
+
+After a few minutes, check the HPA to ensure it is scaling correctly:
+
+```bash
+k8s get hpa
+```
+
+Then cleanup the deployments like so:
+
+```bash
+k8s delete -f helloworld.yaml
+k8s delete -f helloworld-gateway.yaml
+k8s delete hpa helloworld-v1 helloworld-v2
+```
